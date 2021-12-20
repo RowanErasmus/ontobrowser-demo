@@ -21,8 +21,8 @@ hierarchical/graph format, advanced search capabilities, peer review/approval wo
 
 # Documentation
 
-* [Build and Deploy (Docker)](doc/docker_install.md)
-* [Build and Deploy (Local)](doc/install.md) (no longer maintained)
+* [Build and Deploy (Docker)](doc/instal-docker.md)
+* [Build and Deploy (Local)](doc/install-oracle.md) (no longer maintained)
 * [Approval Workflow](doc/approval_workflow.pdf)
 * [Web Services](doc/web_services.md)
 * [Database Design](doc/database_design.pdf)
