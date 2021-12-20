@@ -1,0 +1,17 @@
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Mac
+.DS_Store
+
+# Maven
+log/
+target/*
+!target/ontobrowser.war
+/target/
+
+# IntelliJ
+/.idea
+ontobrowser.iml

@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+
+  ontobrowser:
+    container_name: ontobrowser
+    build: .
+    ports:
+      - "8088:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      OB_DATASOURCE_PASSWORD: "admin"
+      OB_DATASOURCE_USERNAME: "admin"
+      OB_DATASOURCE_URL: "jdbc:mysql://host.docker.internal:3307/ontobrowser?allowPublicKeyRetrieval=true&useSSL=false&verifyServerCertificate=false"
+
+  db:
+    image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
+    container_name: ontobrowser_db
+    volumes:
+      - ./db/ontobrowser.sql:/docker-entrypoint-initdb.d/1.sql
+      - ontobrowser_db_data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_DATABASE=ontobrowser
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost", "-u", "admin", "-padmin" ]
+      timeout: 10s
+      retries: 10
+    cap_add:
+      - SYS_NICE  # Hides the recurring 'mbind not permitted' warning from the logs
+
+volumes:
+  ontobrowser_db_data:

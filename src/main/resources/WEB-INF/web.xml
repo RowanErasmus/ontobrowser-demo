@@ -1,0 +1,19 @@
+<web-app>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>secure</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>Admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-role>
+        <description>The role that is required to log in to /secure/*</description>
+        <role-name>Admin</role-name>
+    </security-role>
+    <login-config>
+        <auth-method>BASIC</auth-method>
+        <realm-name>ontobrowser_domain</realm-name>
+    </login-config>
+</web-app>
